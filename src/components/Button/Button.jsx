@@ -1,8 +1,10 @@
 const Button = () => {
     return (
-        <button className="bg-black no-underline cursor-pointer border-none ">
-            <i className="bi bi-cart text-2xl mr-20 rounded-full text-black p-2 bg-gris" >0</i>
-        </button>
+        <div>
+            <button className="cursor-pointer bg-gris transition-colors flex items-center justify-center rounded-lg  hover:bg-slate-600 focus:ring-2 focus:ring-slate-400 duration-300 ">
+                <i className="bi bi-cart text-2xl mr-1 p-1 ">0</i>
+            </button>
+        </div>
     )
 }
 

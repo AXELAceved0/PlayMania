@@ -1,0 +1,34 @@
+.mainContainer {
+    background-image: url(/src/components/PaginaInicio/assets/fondo.png);
+    background-attachment: local;
+    background-repeat: no-repeat;
+    height: 500px;
+    background-position: center;
+    background-color: black;
+}
+
+.divCategorias{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+        text-align: center;
+        padding: 8rem 28rem 0 0;
+}
+
+.categorias{
+    margin: 10px;
+    text-decoration: none;
+    color: black;
+    background-color: #44ad50;
+    border-radius: 6px;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+.categorias:hover{
+    background-color: #00fa1d ;
+    transition: background-color 0.8s;
+}
