@@ -5,12 +5,12 @@ const ItemCount = () => {
     
     const decrement = () => {
         if(count > 0){
-            setCount(count => count - 1)
+            setCount(prev => prev - 1)
         }
     }
 
     const increment = () => {
-        setCount(count => count + 1)
+        setCount(prev => prev + 1)
     }
 
     return(
