@@ -1,25 +1,28 @@
 import { useState } from "react"
 
-const ItemCount = () => {
-    const [count,setCount] = useState(0)
-    
-    const decrement = () => {
-        if(count > 0){
-            setCount(prev => prev - 1)
+
+const ItemCount = ({initial = 1, stock, onAdd}) => {
+    const [count, setCount] = useState(initial)
+
+    const decrement = () =>{
+        if(count > 1){
+            setCount (prev => prev - 1)
         }
     }
 
     const increment = () => {
-        setCount(prev => prev + 1)
+        if(count < stock){
+            setCount(prev => prev + 1)
+        }
     }
-
-    return(
-    <div className="flex">
-        <button onClick={decrement}>-</button>
-        <h1>{count}</h1>
-        <button onClick={increment}>+</button>
-    </div>
-)
+    return (
+        <article>
+            <h3 className='text-center'>{count}</h3>
+            <button onClick={decrement}>-</button>
+            <button onClick={() => onAdd(count)}> Agregar al Carrito</button>
+            <button onClick={increment}>+</button>
+        </article>
+    )
 }
 
 export default ItemCount

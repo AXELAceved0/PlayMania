@@ -1,4 +1,4 @@
-import ItemDetail from "../ItemDetail/ItemDetail"
+// import ItemDetail from "../ItemDetail/ItemDetail"
 import { useState , useEffect} from "react"
 import { useParams } from "react-router-dom"
 import { getProductosById } from "../../asyncMock"
@@ -19,7 +19,7 @@ useEffect(() => {
     return(
         <div>
             <h1>Detalle del Producto</h1>
-            <ItemDetail {...productos} />
+            {/* <ItemDetail {...productos} /> */}
         </div>
     )
 }
