@@ -6,7 +6,7 @@ const PaginaInicio = () => {
 
     useEffect(() => {
         const image = new Image();
-        image.src = '../PaginaInicio/assets/fondo.png';
+        image.src = '/components/PaginaInicio/assets/fondo.png';
         image.onload = () => {
             setLoaded(true);
         };

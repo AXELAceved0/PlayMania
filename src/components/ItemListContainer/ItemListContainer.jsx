@@ -24,7 +24,9 @@ const ItemListContainer = ({ greeting }) => {
 
     return (
         <main>
-            <h1 className="text-center">{greeting}</h1>
+            <div className="text-center">
+            <h1 className="inline-block  border-b-2 border-[#40A2E3] text-[#40A2E3] text-[30px]">{greeting}</h1>
+            </div>
             <ItemList productos={productos} />
         </main>
     )

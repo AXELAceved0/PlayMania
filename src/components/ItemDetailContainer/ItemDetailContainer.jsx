@@ -17,7 +17,9 @@ useEffect(() => {
 
     return(
         <main>
-            <h1>Detalle del Producto</h1>
+            <div className="text-center mb-4">
+            <h1 className="inline-block  border-b-2 border-[#40A2E3] text-[#40A2E3] text-[35px]">Detalle del Producto</h1>
+            </div>
             <ItemDetail {...productos} />
         </main>
     )
