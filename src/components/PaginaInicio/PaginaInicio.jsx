@@ -1,19 +1,12 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import classes from "./PaginaInicio.module.css"
+
 
 const PaginaInicio = () => {
-    const [loaded, setLoaded] = useState(false);
 
-    useEffect(() => {
-        const image = new Image();
-        image.src = '/components/PaginaInicio/assets/fondo.png';
-        image.onload = () => {
-            setLoaded(true);
-        };
-    }, []);
 
     return (
-        <main className={`bg-fondo bg-cover bg-center h-[450px] ${loaded ? '' : 'bg-transparent'}`}>
+        <main className={classes.fondo}>
             <div className="flex flex-col justify-center pt-20 pl-28 text-22 text-left ">
                 <Link to='/categoria/PS4' className="w-[45px] text-center relative group cursor-pointer">
                     <span className="relative text-color-principal">PS4</span>
