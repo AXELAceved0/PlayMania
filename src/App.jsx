@@ -4,14 +4,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer"
 import PaginaInicio from "./components/PaginaInicio/PaginaInicio"
 import { CartProvider } from "./Context/CartContext"
-// import { NotificationProvider } from "./notification/NotificationService"
+import { NotificationProvider } from "./notification/NotificationService"
 
 function App() {
 
   return (
     <>
       <BrowserRouter>
-        {/* <NotificationProvider> */}
+        <NotificationProvider>
           <CartProvider>
             <NavBar />
             <Routes>
@@ -21,7 +21,7 @@ function App() {
               <Route path="/item/:itemId" element={<ItemDetailContainer />} />
             </Routes>
           </CartProvider>
-        {/* </NotificationProvider> */}
+        </NotificationProvider>
       </BrowserRouter>
     </>
   )
