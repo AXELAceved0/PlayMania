@@ -1,98 +1,94 @@
-// import { useContext, useState } from "react"
-// import { CartContext } from "../../Context/CartContext"
-// import { getDocs, collection, query, where, documentId, QuerySnapshot ,writeBatch,addDoc} from "firebase/firestore"
-// import { db } from "../../services/firebase/firebaseConfig"
-// import { Await } from "react-router-dom"
+import { useContext, useState } from "react"
+import { CartContext } from "../../Context/CartContext"
+import { db } from "../../services/firebase/firebaseConfig"
+import { addDoc, collection, documentId, getDocs, query, where, writeBatch } from "firebase/firestore"
 
+const Checkout = () => {
 
+    const [loading,setLoading] = useState(false)
+    const [orderId, setOrderId]= useState(null)
+    const { cart, total , clearCart} = useContext(CartContext)
 
-// const Checkout = () => {
+    const createOrder = async () => {
+        try {
+            const objOrder = {
+                buyer: {
+                    nombre: "",
+                    email: "",
+                    numero: "",
 
-//     const [loading, setLoading] = useState(false)
-//     const [orderId, setOrderId] = useState(null)
-//     const { cart, total, clearCart } = useContext(CartContext)
+                },
+                items: cart,
+                total
+            }
 
-//     const createOrder = async (useData) => {
-//         try {
-//             const objOrder = {
-//                 buyer: {
-//                     name: '',
-//                     email: '',
-//                     phone: ''
-//                 },
-//                 item: cart,
-//                 total
-//             }
+            const batch = writeBatch(db)
+            const outOfStock = []
+            const ids = cart.map(prod => prod.id)
 
+            const productosCollections = query(collection(db, 'productos'), where(documentId(), 'in', ids))
 
-//             const batch = writeBatch(db)
-//             const outOfStock = []
-//             const ids = cart.map(prod => prod.id)
+            const querySnapshot = await getDocs(productosCollections)
+            const { docs } = querySnapshot
 
-//             const productsCollection = query(collection(db, 'productos'), where(documentId(), 'in', ids))
+            docs.forEach(doc => {
+                const data = doc.data()
+                const stockDb = data.stock
 
-//             const QuerySnapshot = await getDocs(productsCollection)
-//             const { docs } = QuerySnapshot
+                const productoAddedToCart = cart.find(prod => prod.id === doc.id)
+                const prodQuantity = productoAddedToCart.quantity
 
-//             docs.forEach(doc => {
-//                 const data = doc.data()
-//                 const stockDb = data.stock
+                if (stockDb >= prodQuantity) {
+                    batch.update(doc.ref, { stock: stockDb - prodQuantity })
+                } else {
+                    outOfStock.push({ id: doc.id, ...data })
+                }
+            })
 
-//                 const productAddedToCart = cart.find(prod => prod.id === doc.id)
-//                 const prodQuantity = productAddedToCart.quantity
+            if (outOfStock.length === 0) {
+                batch.commit()
 
-//                 if (stockDb >= prodQuantity) {
-//                     batch.update(doc.ref, { stock: stockDb - prodQuantity })
-//                 } else {
-//                     outOfStock.push({ id: doc.id, ...data })
-//                 }
-//             })
+                const orderCollection = collection(db, 'order')
+                const { id } = await addDoc(orderCollection, objOrder)
 
-//             if (outOfStock.length === 0) {
-//                 batch.commit()
+                clearCart()
+                setOrderId(id);
+            } else {
+                console.error('NO hay productos en stock');
+            }
+        } catch (error) {
+            console.error('Hubo un error en su orden');
+        } finally {
+            setLoading(false)
+            console.log('Hubo un error en su orden');
+        }
 
-//                 const orderCollection = collection(db, 'orders')
-//                 const { id } = await addDoc(orderCollection, objOrder)
+    }
 
-//                 clearCart()
-//                 setOrderId(id)
-//             } else {
-//                 console.log('no hay productos');
-//             }
-//         } catch (error) {
-//             console.log('hubo un error en su pedido');
-//             console.log('Hubo un error en su pedido:', error);
+    if(loading){
+        return <h1>Su order esta siendo generada...</h1>
+    }
 
-//         } finally {
-//             setLoading(false)
+    if(orderId){
+        return <h1>Su codigo id es: {orderId} </h1>
+    }
 
-//         }
-//     }
+    return (
+        <div>
+            <div className="text-center">
+            <h1 className="inline-block text-[40px] text-cyan-5inline-block  border-b-2 border-[#40A2E3] text-[#40A2E3] text-[35px]00">Checkout</h1>
+            </div>
+            <h2 className="flex justify-center items-center">
+                <div>
+                    <input type="text" name="nombre" placeholder="Nombre" />
+                    <input type="text" name="apellido" placeholder="Apellido" />
+                    <input type="number" name="celular" placeholder="Celular" />
+                    <input type="text" name="email" placeholder="Email" />
+                </div>
+            </h2>
+            <button onClick={createOrder}>Generar orden de compra</button>
+        </div>
+    )
+}
 
-//     if (loading) {
-//         return <h1>Orden siendo generada</h1>
-//     }
-
-//     if (orderId) {
-//         return <h1>el ID de su orden es: {orderId}</h1>
-//     }
-
-
-
-//     return (
-//         <div>
-//             <h1>Checkout</h1>
-//             <h2>
-//                 <div>
-//                     <input type="text" name="nombre" placeholder="Nombre" />
-//                     <input type="text" name="apellido" placeholder="Apellido" />
-//                     <input type="number" name="celular" placeholder="Celular" />
-//                     <input type="text" name="email" placeholder="Email" />
-//                 </div>
-//             </h2>
-//             <button onClick={createOrder}>Generar orden de compra</button>
-//         </div>
-//     )
-// }
-
-// export default Checkout
+export default Checkout
