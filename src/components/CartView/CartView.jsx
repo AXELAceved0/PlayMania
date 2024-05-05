@@ -1,9 +1,9 @@
-import { useContext } from "react"
-import { CartContext } from "../../Context/CartContext"
-import { Link } from "react-router-dom"
+import { useContext } from "react";
+import { CartContext } from "../../Context/CartContext";
+import { Link } from "react-router-dom";
 
 const CartView = () => {
-    const { cart } = useContext(CartContext)
+    const { cart } = useContext(CartContext);
 
     return (
         <div>
@@ -17,7 +17,7 @@ const CartView = () => {
                             <article className="m-2" key={prod.id}>
                                 <h2 className="text-[30px] text-color-secundario pt-2" >{prod.nombre}</h2>
                             </article>
-                        )
+                        );
                     })
                 }
             </section>
@@ -25,7 +25,7 @@ const CartView = () => {
                 <Link className=" text-color-secundario hover:text-color-principal transition hover:duration-900 focus:text-color-secundario text-[40px] " to='/checkout'>Ir al Checkout</Link>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CartView
+export default CartView;

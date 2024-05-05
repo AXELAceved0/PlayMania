@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { useState, createContext} from "react";
 
 export const CartContext = createContext(1)
 
@@ -9,12 +9,12 @@ export const CartProvider = ({ children }) => {
         if (!isInCart(productToAdd.id)) {
             setCart((prev) => [...prev, productToAdd]);
         } else {
-            console.log("El producto ya está agregado");
+            console.error("El producto ya está agregado");
         }
     };
 
     const isInCart = (id) => {
-        return cart.some((prod) => prod.id === id);
+        return cart.some(prod => prod.id === id);
     }
 
     const clearCart = () =>{
@@ -24,7 +24,7 @@ export const CartProvider = ({ children }) => {
     const getTotalQuantity = () => {
         let acumulador = 0;
 
-        cart.forEach((prod) => {
+        cart.forEach(prod => {
             acumulador += prod.quantity;
         });
 
@@ -35,7 +35,7 @@ export const CartProvider = ({ children }) => {
     const getTotal = () => {
         let acumulador = 0;
 
-        cart.forEach((prod) => {
+        cart.forEach(prod => {
             acumulador += prod.quantity * prod.precio;
         });
         return acumulador;
