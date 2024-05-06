@@ -14,8 +14,6 @@ const ItemDetailContainer = () => {
     useEffect(() => {
         const productosDoc = doc(db, 'productos', itemId)
 
-        console.log("Obteniendo datos del producto:", itemId);
-
         getDoc(productosDoc)
             .then(QueryDocumentSnapshot => {
                 console.log("Datos del producto obtenidos:", QueryDocumentSnapshot.data());

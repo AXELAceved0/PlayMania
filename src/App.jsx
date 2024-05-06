@@ -32,11 +32,11 @@ function App() {
   //       {nombre: 'Alien Isolation: The Collection', precio: 16000, formato: 'digital', categoria: 'PS4', descripcion: 'Juego digital para tu consola favorita', stock: 5,img:`https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Alien_Isolation.jpg/220px-Alien_Isolation.jpg` }
   //   ]
 
-  //   const productsCollection = collection(db, 'productos')
+  //   const productosCollection = collection(db, 'productos')
   
   //   productos.forEach(async prod => {
   //     console.log('addDoc')
-  //     await addDoc(productsCollection, prod)
+  //     await addDoc(productosCollection, prod)
   //   })
   // }, [])
 
