@@ -28,11 +28,14 @@ const Checkout = () => {
             const outOfStock = []
             const ids = cart.map(prod => prod.id)
 
-            const productsCollection = query(collection(db, 'productos'), where(documentId, 'in', ids))
+            const productsCollection = query(collection(db, 'productos'), where(documentId(), 'in', ids));
+
 
 
             const querySnapshot = await getDocs(productsCollection)
             const { docs } = querySnapshot
+
+            
 
             docs.forEach(doc => {
                 const data = doc.data()

@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD8wgpMJMVE6rxwBibmX3eBEVyUAl-AxMc",
-    authDomain: "e-commerce-playmania-d356d.firebaseapp.com",
-    projectId: "e-commerce-playmania-d356d",
-    storageBucket: "e-commerce-playmania-d356d.appspot.com",
-    messagingSenderId: "729383451172",
-    appId: "1:729383451172:web:8efa67b54e4d460652f6b1"
+    apiKey: "AIzaSyAG8trUO2kXP-NFfbCdfEZuE9L1LFebWNw",
+    authDomain: "ecommerce-playmania-da53f.firebaseapp.com",
+    projectId: "ecommerce-playmania-da53f",
+    storageBucket: "ecommerce-playmania-da53f.appspot.com",
+    messagingSenderId: "264834879790",
+    appId: "1:264834879790:web:6edbfce6a7b5293c60aabf"
 };
 
 const app = initializeApp(firebaseConfig);
