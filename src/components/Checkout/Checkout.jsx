@@ -9,7 +9,6 @@ const Checkout = () => {
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState(null)
     const { cart, total, clearCart } = useContext(CartContext)
-    const [error, setError] = useState(null);
 
     const createOrder = async () => {
         try {
@@ -63,8 +62,7 @@ const Checkout = () => {
                 console.log('no hay productos');
             }
         } catch (error) {
-            console.error('Hubo un error al generar su orden:', error);
-            setError(error);
+            console.error('Hubo un error al generar su orden:');
         } finally {
             setLoading(false);
         }
@@ -83,7 +81,6 @@ const Checkout = () => {
         <div>
             <Form />
             <button onClick={createOrder}>Generar orden de compra</button>
-            {error && <p>Error al generar la orden: {error.message}</p>}
         </div>
     );
 }    
